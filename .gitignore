@@ -1,0 +1,32 @@
+# Build directories
+build/
+build-*/
+cmake-build-*/
+
+# IDE files
+.vscode/
+.vs/
+*.vcxproj.user
+*.sln.docstates
+
+# Temporary files
+*.tmp
+*.temp
+*~
+.DS_Store
+Thumbs.db
+
+# Backup files
+*_backup.*
+*_new.*
+*_old.*
+
+# Test files
+testing/
+tests/
+
+# Documentation drafts
+documentation/
+
+# IDE conversation files
+.claude/
