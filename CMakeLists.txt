@@ -30,12 +30,13 @@ juce_add_plugin(ReallyCheap-Twenty
     AU_MAIN_TYPE "kAudioUnitType_Effect"
 )
 
-# Generate binary data from assets
+# Generate binary data from assets (audio + UI)
 juce_add_binary_data(NoiseAssets
     SOURCES
         "assets/noise/vinyl.mp3"
         "assets/noise/tape.mp3"
         "assets/noise/jazz club.mp3"
+        "assets/titlecard.png"
 )
 
 # UI assets loaded from file paths at runtime (like knob PNGs)
