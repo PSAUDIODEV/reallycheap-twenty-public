@@ -41,7 +41,7 @@ juce_add_binary_data(NoiseAssets
 # Generate binary data for UI assets (just title card for now)
 juce_add_binary_data(UIAssets
     SOURCES
-        "assets/Title_Card_Cleaner.png"
+        "assets/titlecard.png"
 )
 
 juce_generate_juce_header(ReallyCheap-Twenty)

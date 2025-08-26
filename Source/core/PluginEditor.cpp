@@ -1008,8 +1008,8 @@ void ReallyCheapTwentyAudioProcessorEditor::loadKnobSVGs()
 void ReallyCheapTwentyAudioProcessorEditor::loadTitleCardImage()
 {
     // Load title card from embedded binary data
-    auto titleCardData = BinaryData::Title_Card_Cleaner_png;
-    auto titleCardSize = BinaryData::Title_Card_Cleaner_pngSize;
+    auto titleCardData = BinaryData::titlecard_png;
+    auto titleCardSize = BinaryData::titlecard_pngSize;
     
     titleCardImage = juce::ImageFileFormat::loadFrom(titleCardData, titleCardSize);
     
