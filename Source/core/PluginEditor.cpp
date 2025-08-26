@@ -1,5 +1,6 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include "BinaryData.h"
 
 ReallyCheapTwentyAudioProcessorEditor::ReallyCheapTwentyAudioProcessorEditor(ReallyCheapTwentyAudioProcessor& p)
     : AudioProcessorEditor(&p), audioProcessor(p)
@@ -1006,27 +1007,21 @@ void ReallyCheapTwentyAudioProcessorEditor::loadKnobSVGs()
 
 void ReallyCheapTwentyAudioProcessorEditor::loadTitleCardImage()
 {
-    // Try multiple locations for the cleaner title card PNG
-    juce::Array<juce::File> possiblePaths;
-    possiblePaths.add(juce::File::getCurrentWorkingDirectory().getChildFile("ReallyCheap-Twenty SVG assets").getChildFile("Title Card Cleaner.png"));
-    possiblePaths.add(juce::File::getSpecialLocation(juce::File::currentExecutableFile).getParentDirectory().getChildFile("ReallyCheap-Twenty SVG assets").getChildFile("Title Card Cleaner.png"));
-    possiblePaths.add(juce::File("C:\\Users\\Owner\\Desktop\\DEV\\ReallyCheap-Twenty\\ReallyCheap-Twenty SVG assets\\Title Card Cleaner.png"));
+    // Load title card from embedded binary data
+    auto titleCardData = BinaryData::Title_Card_Cleaner_png;
+    auto titleCardSize = BinaryData::Title_Card_Cleaner_pngSize;
     
-    for (auto& path : possiblePaths)
+    titleCardImage = juce::ImageFileFormat::loadFrom(titleCardData, titleCardSize);
+    
+    if (titleCardImage.isValid())
     {
-        if (path.existsAsFile())
-        {
-            titleCardImage = juce::ImageFileFormat::loadFrom(path);
-            if (titleCardImage.isValid())
-            {
-                DBG("Loaded title card cleaner PNG from: " << path.getFullPathName());
-                DBG("Title card cleaner dimensions: " << titleCardImage.getWidth() << "x" << titleCardImage.getHeight());
-                return;
-            }
-        }
+        DBG("Successfully loaded title card from embedded data");
+        DBG("Title card dimensions: " << titleCardImage.getWidth() << "x" << titleCardImage.getHeight());
     }
-    
-    DBG("Could not load title card cleaner PNG");
+    else
+    {
+        DBG("Failed to load title card from embedded data");
+    }
 }
 
 void ReallyCheapTwentyAudioProcessorEditor::loadWobbleKnobSVGs()

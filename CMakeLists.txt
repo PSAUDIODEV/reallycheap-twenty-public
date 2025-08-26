@@ -38,6 +38,22 @@ juce_add_binary_data(NoiseAssets
         "assets/noise/jazz club.mp3"
 )
 
+# Generate binary data for UI assets
+juce_add_binary_data(UIAssets
+    SOURCES
+        "assets/background.png"
+        "assets/Title Card Cleaner.png"
+        "assets/knobs/golden_knob.png"
+        "assets/knobs/golden_knob_filmstrip.png"
+        "assets/knobs/knob_filmstrip.png"
+        "assets/knobs/large_knob.png"
+        "assets/knobs/large_knob_filmstrip.png"
+        "assets/knobs/mockup_knob.png"
+        "assets/knobs/single_knob.png"
+        "assets/knobs/small_knob.png"
+        "assets/knobs/small_knob_filmstrip.png"
+)
+
 juce_generate_juce_header(ReallyCheap-Twenty)
 
 target_sources(ReallyCheap-Twenty
@@ -79,6 +95,7 @@ target_compile_definitions(ReallyCheap-Twenty
 target_link_libraries(ReallyCheap-Twenty
     PRIVATE
         NoiseAssets
+        UIAssets
         juce::juce_audio_utils
         juce::juce_dsp
     PUBLIC

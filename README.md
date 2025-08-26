@@ -40,7 +40,7 @@ A JUCE-based VST3 audio plugin that emulates vintage character with multiple DSP
 ### Windows
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/PSAUDIODEV/reallycheap-twenty-public.git
 cd ReallyCheap-Twenty
 git submodule update --init --recursive
 cmake -B build -G "Visual Studio 17 2022" -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF
@@ -52,7 +52,7 @@ The plugin will automatically install to `C:\Program Files\Common Files\VST3\` a
 ### Mac
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/PSAUDIODEV/reallycheap-twenty-public.git
 cd ReallyCheap-Twenty
 git submodule update --init --recursive
 cmake -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF
