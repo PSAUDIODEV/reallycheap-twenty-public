@@ -1007,21 +1007,15 @@ void ReallyCheapTwentyAudioProcessorEditor::loadKnobSVGs()
 
 void ReallyCheapTwentyAudioProcessorEditor::loadTitleCardImage()
 {
-    // Load title card from embedded binary data
+    // TODO: Re-enable PNG loading after fixing binary data issues
+    // Temporarily disabled to get Mac builds working
+    DBG("Title card loading temporarily disabled for cross-platform compatibility");
+    
+    /* DISABLED - causing Mac build issues
     auto titleCardData = BinaryData::Title_Card_Cleaner_png;
     auto titleCardSize = BinaryData::Title_Card_Cleaner_pngSize;
-    
     titleCardImage = juce::ImageFileFormat::loadFrom(titleCardData, titleCardSize);
-    
-    if (titleCardImage.isValid())
-    {
-        DBG("Successfully loaded title card from embedded data");
-        DBG("Title card dimensions: " << titleCardImage.getWidth() << "x" << titleCardImage.getHeight());
-    }
-    else
-    {
-        DBG("Failed to load title card from embedded data");
-    }
+    */
 }
 
 void ReallyCheapTwentyAudioProcessorEditor::loadWobbleKnobSVGs()
