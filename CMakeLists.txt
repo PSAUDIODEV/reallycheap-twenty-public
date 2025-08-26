@@ -38,22 +38,11 @@ juce_add_binary_data(NoiseAssets
         "assets/noise/jazz club.mp3"
 )
 
-# Generate binary data for UI assets
-# TODO: Re-enable after fixing Mac build issues
-# juce_add_binary_data(UIAssets
-#     SOURCES
-#         "assets/background.png"
-#         "assets/Title_Card_Cleaner.png"
-#         "assets/knobs/golden_knob.png"
-#         "assets/knobs/golden_knob_filmstrip.png"
-#         "assets/knobs/knob_filmstrip.png"
-#         "assets/knobs/large_knob.png"
-#         "assets/knobs/large_knob_filmstrip.png"
-#         "assets/knobs/mockup_knob.png"
-#         "assets/knobs/single_knob.png"
-#         "assets/knobs/small_knob.png"
-#         "assets/knobs/small_knob_filmstrip.png"
-# )
+# Generate binary data for UI assets (just title card for now)
+juce_add_binary_data(UIAssets
+    SOURCES
+        "assets/Title_Card_Cleaner.png"
+)
 
 juce_generate_juce_header(ReallyCheap-Twenty)
 
@@ -96,7 +85,7 @@ target_compile_definitions(ReallyCheap-Twenty
 target_link_libraries(ReallyCheap-Twenty
     PRIVATE
         NoiseAssets
-        # UIAssets  # TODO: Re-enable after fixing Mac build issues
+        UIAssets
         juce::juce_audio_utils
         juce::juce_dsp
     PUBLIC
