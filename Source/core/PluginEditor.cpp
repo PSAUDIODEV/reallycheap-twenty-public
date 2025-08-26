@@ -1007,21 +1007,28 @@ void ReallyCheapTwentyAudioProcessorEditor::loadKnobSVGs()
 
 void ReallyCheapTwentyAudioProcessorEditor::loadTitleCardImage()
 {
-    // Load title card from embedded binary data
-    auto titleCardData = BinaryData::titlecard_png;
-    auto titleCardSize = BinaryData::titlecard_pngSize;
+    // Load title card from file paths (like other PNGs in the project)
+    juce::Array<juce::File> possiblePaths;
     
-    titleCardImage = juce::ImageFileFormat::loadFrom(titleCardData, titleCardSize);
+    // Try multiple locations for the title card PNG
+    possiblePaths.add(juce::File::getCurrentWorkingDirectory().getChildFile("assets").getChildFile("titlecard.png"));
+    possiblePaths.add(juce::File::getSpecialLocation(juce::File::currentExecutableFile).getParentDirectory().getChildFile("assets").getChildFile("titlecard.png"));
     
-    if (titleCardImage.isValid())
+    for (auto& path : possiblePaths)
     {
-        DBG("Successfully loaded title card from embedded data");
-        DBG("Title card dimensions: " << titleCardImage.getWidth() << "x" << titleCardImage.getHeight());
+        if (path.existsAsFile())
+        {
+            titleCardImage = juce::ImageFileFormat::loadFrom(path);
+            if (titleCardImage.isValid())
+            {
+                DBG("Successfully loaded title card from: " << path.getFullPathName());
+                DBG("Title card dimensions: " << titleCardImage.getWidth() << "x" << titleCardImage.getHeight());
+                return;
+            }
+        }
     }
-    else
-    {
-        DBG("Failed to load title card from embedded data");
-    }
+    
+    DBG("Could not load title card PNG from any location");
 }
 
 void ReallyCheapTwentyAudioProcessorEditor::loadWobbleKnobSVGs()

@@ -38,11 +38,8 @@ juce_add_binary_data(NoiseAssets
         "assets/noise/jazz club.mp3"
 )
 
-# Generate binary data for UI assets (just title card for now)
-juce_add_binary_data(UIAssets
-    SOURCES
-        "assets/titlecard.png"
-)
+# UI assets loaded from file paths at runtime (like knob PNGs)
+# Only MP3 audio files are embedded via NoiseAssets
 
 juce_generate_juce_header(ReallyCheap-Twenty)
 
@@ -85,7 +82,6 @@ target_compile_definitions(ReallyCheap-Twenty
 target_link_libraries(ReallyCheap-Twenty
     PRIVATE
         NoiseAssets
-        UIAssets
         juce::juce_audio_utils
         juce::juce_dsp
     PUBLIC
