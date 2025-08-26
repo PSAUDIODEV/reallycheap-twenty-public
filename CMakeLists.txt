@@ -42,7 +42,7 @@ juce_add_binary_data(NoiseAssets
 juce_add_binary_data(UIAssets
     SOURCES
         "assets/background.png"
-        "assets/Title Card Cleaner.png"
+        "assets/Title_Card_Cleaner.png"
         "assets/knobs/golden_knob.png"
         "assets/knobs/golden_knob_filmstrip.png"
         "assets/knobs/knob_filmstrip.png"
