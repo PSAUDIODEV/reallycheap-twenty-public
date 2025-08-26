@@ -23,7 +23,10 @@ jobs:
         xcode-version: latest-stable
 
     - name: Install CMake
-      run: brew install cmake
+      run: |
+        # Handle CMake tap conflict on GitHub runners
+        brew uninstall cmake 2>/dev/null || true
+        brew install cmake
 
     - name: Configure CMake
       run: |
