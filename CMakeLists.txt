@@ -15,19 +15,22 @@ endif()
 add_subdirectory(JUCE)
 
 juce_add_plugin(ReallyCheap-Twenty
-    COMPANY_NAME "ReallyCheap Audio"
+    COMPANY_NAME "ReallyCheapAudio"
+    BUNDLE_ID "com.reallycheapaudio.reallycheaptwenty"
     IS_SYNTH FALSE
     NEEDS_MIDI_INPUT FALSE
     NEEDS_MIDI_OUTPUT FALSE
     IS_MIDI_EFFECT FALSE
     EDITOR_WANTS_KEYBOARD_FOCUS FALSE
     COPY_PLUGIN_AFTER_BUILD TRUE
-    PLUGIN_MANUFACTURER_CODE RcCh
-    PLUGIN_CODE RcT1
+    PLUGIN_MANUFACTURER_CODE RcAu
+    PLUGIN_CODE RcTw
     FORMATS VST3 AU
     PRODUCT_NAME "ReallyCheap-Twenty"
-    VST3_CATEGORIES "Fx" "Distortion"
+    VST3_CATEGORIES "Fx"
     AU_MAIN_TYPE "kAudioUnitType_Effect"
+    DESCRIPTION "Vintage character audio processor"
+    PLUGIN_VERSION "1.0.0"
 )
 
 # Generate binary data from assets (audio + UI)

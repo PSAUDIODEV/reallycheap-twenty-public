@@ -108,6 +108,13 @@ void ReallyCheapTwentyAudioProcessor::changeProgramName(int index, const juce::S
 
 void ReallyCheapTwentyAudioProcessor::prepareToPlay(double sampleRate, int samplesPerBlock)
 {
+    // FL Studio compatibility - validate parameters
+    if (sampleRate <= 0 || samplesPerBlock <= 0)
+    {
+        DBG("Invalid audio parameters - FL Studio compatibility fallback");
+        return; // Don't crash FL Studio with invalid params
+    }
+    
     inGainSmoothed.reset(sampleRate, 0.02);
     outGainSmoothed.reset(sampleRate, 0.02);
     mixSmoothed.reset(sampleRate, 0.03);
