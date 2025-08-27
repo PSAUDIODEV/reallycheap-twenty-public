@@ -43,29 +43,27 @@ ReallyCheapTwentyAudioProcessorEditor::ReallyCheapTwentyAudioProcessorEditor(Rea
     setupSpaceKnobs();         // Verb module (formerly Space)
     setupSpaceControls();      // Verb module controls
     setupPresetControls();
-    // DISABLE ALL ASSET LOADING - Mac debugging (minimal plugin)
-    DBG("Mac debug mode: all asset loading disabled for compatibility testing");
+    // Load all assets (full functionality restored)
+    loadBackgroundSVG();
+    loadKnobSVGs();
+    loadWobbleKnobSVGs();       // Bend module SVGs
+    loadWobbleSwitchSVGs();     // Bend module switch SVGs
+    loadDigitalKnobSVGs();      // Bitcrush module SVGs
+    loadDigitalSwitchSVGs();    // Bitcrush module switch SVGs
+    loadDistortKnobSVGs();      // Crunch module SVGs
+    loadDistortControlSVGs();   // Crunch module control SVGs
+    loadMagneticKnobSVGs();     // Tape module SVGs
+    loadMagneticControlSVGs();  // Tape module control SVGs
+    loadNoiseKnobSVGs();        // Atmosphere module SVGs
+    loadNoiseControlSVGs();     // Atmosphere module control SVGs
+    loadSpaceKnobSVGs();        // Verb module SVGs
+    loadSpaceControlSVGs();     // Verb module control SVGs
+    loadTitleCardImage();       // Title card PNG (embedded)
+    loadPresetSelectorSVGs();
+    loadCustomFont();
     
-    // loadBackgroundSVG();           // DISABLED 
-    // loadKnobSVGs();                // DISABLED
-    // loadWobbleKnobSVGs();          // DISABLED
-    // loadWobbleSwitchSVGs();        // DISABLED
-    // loadDigitalKnobSVGs();         // DISABLED
-    // loadDigitalSwitchSVGs();       // DISABLED
-    // loadDistortKnobSVGs();         // DISABLED
-    // loadDistortControlSVGs();      // DISABLED
-    // loadMagneticKnobSVGs();        // DISABLED
-    // loadMagneticControlSVGs();     // DISABLED
-    // loadNoiseKnobSVGs();           // DISABLED
-    // loadNoiseControlSVGs();        // DISABLED
-    // loadSpaceKnobSVGs();           // DISABLED
-    // loadSpaceControlSVGs();        // DISABLED
-    // loadTitleCardImage();          // DISABLED
-    // loadPresetSelectorSVGs();      // DISABLED
-    // loadCustomFont();              // DISABLED
-    
-    // Update fonts after custom font is loaded - DISABLED for Mac debugging
-    // noiseTypeLabel.setFont(customFont.withHeight(14.0f));  // DISABLED
+    // Update fonts after custom font is loaded
+    noiseTypeLabel.setFont(customFont.withHeight(14.0f));
     
     // Set up resize handle
     resizer = std::make_unique<juce::ResizableCornerComponent>(this, &resizeConstrainer);
