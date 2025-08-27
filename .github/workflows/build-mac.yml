@@ -32,7 +32,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF
+        cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"
 
     - name: Build plugins
       run: |
@@ -45,6 +45,12 @@ jobs:
         ls -la build/ReallyCheap-Twenty_artefacts/Release/VST3/ || echo "VST3 not found"
         echo "Checking for AU..."
         ls -la build/ReallyCheap-Twenty_artefacts/Release/AU/ || echo "AU not found"
+        
+        echo "Checking binary architectures..."
+        if [ -d "build/ReallyCheap-Twenty_artefacts/Release/VST3/ReallyCheap-Twenty.vst3" ]; then
+          file build/ReallyCheap-Twenty_artefacts/Release/VST3/ReallyCheap-Twenty.vst3/Contents/MacOS/ReallyCheap-Twenty || echo "VST3 binary not found"
+          lipo -archs build/ReallyCheap-Twenty_artefacts/Release/VST3/ReallyCheap-Twenty.vst3/Contents/MacOS/ReallyCheap-Twenty 2>/dev/null || echo "Could not check VST3 architectures"
+        fi
 
     - name: Package Mac plugins
       run: |

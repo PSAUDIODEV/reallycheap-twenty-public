@@ -21,13 +21,22 @@ ReallyCheapTwentyAudioProcessor::ReallyCheapTwentyAudioProcessor()
     mixParam = valueTreeState.getRawParameterValue(ReallyCheap::ParameterIDs::mix);
     bypassParam = valueTreeState.getRawParameterValue(ReallyCheap::ParameterIDs::bypass);
     
-    // Load default preset (Subtle Glue)
-    presetManager.loadFactoryPreset("Subtle Glue");
-    presetManager.setCurrentPresetIndex(0);
-    
-    // Load noise assets from embedded binary data (no external files needed!)
-    DBG("Loading embedded noise assets...");
-    ReallyCheap::NoiseAssetManager::getInstance().loadAssetsFromBinaryData();
+    // Initialize safely for M1 Mac compatibility
+    try
+    {
+        // Load default preset (Subtle Glue)
+        presetManager.loadFactoryPreset("Subtle Glue");
+        presetManager.setCurrentPresetIndex(0);
+        
+        // Load noise assets from embedded binary data (no external files needed!)
+        DBG("Loading embedded noise assets...");
+        ReallyCheap::NoiseAssetManager::getInstance().loadAssetsFromBinaryData();
+        DBG("Plugin processor initialized successfully");
+    }
+    catch (...)
+    {
+        DBG("Exception during plugin processor initialization - continuing");
+    }
 }
 
 ReallyCheapTwentyAudioProcessor::~ReallyCheapTwentyAudioProcessor()
