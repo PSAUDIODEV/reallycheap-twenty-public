@@ -58,7 +58,8 @@ ReallyCheapTwentyAudioProcessorEditor::ReallyCheapTwentyAudioProcessorEditor(Rea
     loadNoiseControlSVGs();     // Atmosphere module control SVGs
     loadSpaceKnobSVGs();        // Verb module SVGs
     loadSpaceControlSVGs();     // Verb module control SVGs
-    loadTitleCardImage();
+    // Temporarily disable title card loading to debug crash
+    // loadTitleCardImage();
     loadPresetSelectorSVGs();
     loadCustomFont();
     
@@ -1007,20 +1008,35 @@ void ReallyCheapTwentyAudioProcessorEditor::loadKnobSVGs()
 
 void ReallyCheapTwentyAudioProcessorEditor::loadTitleCardImage()
 {
-    // Load title card from embedded binary data (same as MP3 assets)
-    auto titleCardData = BinaryData::titlecard_png;
-    auto titleCardSize = BinaryData::titlecard_pngSize;
-    
-    titleCardImage = juce::ImageFileFormat::loadFrom(titleCardData, titleCardSize);
-    
-    if (titleCardImage.isValid())
+    // Safely load title card from embedded binary data
+    try
     {
-        DBG("Successfully loaded title card from embedded data");
-        DBG("Title card dimensions: " << titleCardImage.getWidth() << "x" << titleCardImage.getHeight());
+        auto titleCardData = BinaryData::titlecard_png;
+        auto titleCardSize = BinaryData::titlecard_pngSize;
+        
+        if (titleCardData != nullptr && titleCardSize > 0)
+        {
+            titleCardImage = juce::ImageFileFormat::loadFrom(titleCardData, titleCardSize);
+            
+            if (titleCardImage.isValid())
+            {
+                DBG("Successfully loaded title card from embedded data");
+                DBG("Title card dimensions: " << titleCardImage.getWidth() << "x" << titleCardImage.getHeight());
+            }
+            else
+            {
+                DBG("Failed to decode title card from embedded data");
+            }
+        }
+        else
+        {
+            DBG("Title card binary data is null or empty");
+        }
     }
-    else
+    catch (...)
     {
-        DBG("Failed to load title card from embedded data");
+        DBG("Exception occurred while loading title card - continuing without it");
+        titleCardImage = juce::Image();
     }
 }
 
